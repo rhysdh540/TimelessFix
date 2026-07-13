@@ -9,19 +9,13 @@
   ],
   "client": [
     "client.AbstractResourcePackMixin",
-    "client.ChunkCacheMixin",
     "client.DefaultResourcePackMixin",
-    "client.EffectRendererMixin",
-    "client.EntityFXMixin",
-    "client.EntityRendererMixin",
-    "client.FontRendererMixin",
     "client.MinecraftMixin",
     "client.ModelResourceLocationMixin",
     "client.ResourceIndexMixin",
     "client.ResourceLocationAccessor",
     "client.ThreadDownloadImageDataMixin",
-    "client.TimerMixin",
-    "client.VisGraphMixin"
+    "client.TimerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
