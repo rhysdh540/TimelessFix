@@ -15,6 +15,7 @@
     "client.ResourceIndexMixin",
     "client.ResourceLocationAccessor",
     "client.ThreadDownloadImageDataMixin",
+    "client.TextureUtilMixin",
     "client.TimerMixin"
   ],
   "injectors": {
