@@ -8,16 +8,23 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(EnumFacing.Plane.class)
 abstract class EnumFacingPlaneMixin {
-	@Unique private static final EnumFacing[] timelessFix$horizontal = {
-		EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST
-	};
-	@Unique private static final EnumFacing[] timelessFix$vertical = {EnumFacing.UP, EnumFacing.DOWN};
+	@Unique private static volatile EnumFacing[] timelessFix$horizontal;
+	@Unique private static volatile EnumFacing[] timelessFix$vertical;
 
 	@Redirect(
 		method = "iterator",
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/util/EnumFacing$Plane;facings()[Lnet/minecraft/util/EnumFacing;")
 	)
 	private EnumFacing[] reuseFacings(EnumFacing.Plane plane) {
-		return plane == EnumFacing.Plane.HORIZONTAL ? timelessFix$horizontal : timelessFix$vertical;
+		if (plane == EnumFacing.Plane.HORIZONTAL) {
+			if (timelessFix$horizontal == null) {
+				timelessFix$horizontal = plane.facings();
+			}
+			return timelessFix$horizontal;
+		}
+		if (timelessFix$vertical == null) {
+			timelessFix$vertical = plane.facings();
+		}
+		return timelessFix$vertical;
 	}
 }
