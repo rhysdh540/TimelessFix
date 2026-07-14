@@ -4,6 +4,7 @@
   "package": "dev.rdh.timelessfix.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "allocation_rate.EntityLightingMixin",
     "allocation_rate.EntityTameableMixin",
     "allocation_rate.EnumFacingPlaneMixin",
     "allocation_rate.WorldLightingMixin",

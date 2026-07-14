@@ -11,11 +11,14 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(World.class)
 abstract class WorldLightingMixin {
 	@Unique private static final EnumFacing[] timelessFix$facings = EnumFacing.values();
+	@Unique private static final ThreadLocal<BlockPos.MutableBlockPos> timelessFix$neighborPosition =
+		ThreadLocal.withInitial(BlockPos.MutableBlockPos::new);
 
 	@Shadow public abstract boolean canSeeSky(BlockPos pos);
 	@Shadow public abstract IBlockState getBlockState(BlockPos pos);
@@ -54,5 +57,54 @@ abstract class WorldLightingMixin {
 			}
 		}
 		cir.setReturnValue(light);
+	}
+
+	@Redirect(
+		method = {"getLight(Lnet/minecraft/util/BlockPos;Z)I", "getLightFromNeighborsFor"},
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/util/BlockPos;up()Lnet/minecraft/util/BlockPos;")
+	)
+	private BlockPos reuseUpPosition(BlockPos pos) {
+		return offset(pos, EnumFacing.UP);
+	}
+
+	@Redirect(
+		method = {"getLight(Lnet/minecraft/util/BlockPos;Z)I", "getLightFromNeighborsFor"},
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/util/BlockPos;east()Lnet/minecraft/util/BlockPos;")
+	)
+	private BlockPos reuseEastPosition(BlockPos pos) {
+		return offset(pos, EnumFacing.EAST);
+	}
+
+	@Redirect(
+		method = {"getLight(Lnet/minecraft/util/BlockPos;Z)I", "getLightFromNeighborsFor"},
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/util/BlockPos;west()Lnet/minecraft/util/BlockPos;")
+	)
+	private BlockPos reuseWestPosition(BlockPos pos) {
+		return offset(pos, EnumFacing.WEST);
+	}
+
+	@Redirect(
+		method = {"getLight(Lnet/minecraft/util/BlockPos;Z)I", "getLightFromNeighborsFor"},
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/util/BlockPos;south()Lnet/minecraft/util/BlockPos;")
+	)
+	private BlockPos reuseSouthPosition(BlockPos pos) {
+		return offset(pos, EnumFacing.SOUTH);
+	}
+
+	@Redirect(
+		method = {"getLight(Lnet/minecraft/util/BlockPos;Z)I", "getLightFromNeighborsFor"},
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/util/BlockPos;north()Lnet/minecraft/util/BlockPos;")
+	)
+	private BlockPos reuseNorthPosition(BlockPos pos) {
+		return offset(pos, EnumFacing.NORTH);
+	}
+
+	@Unique
+	private static BlockPos offset(BlockPos pos, EnumFacing facing) {
+		return timelessFix$neighborPosition.get().set(
+			pos.getX() + facing.getFrontOffsetX(),
+			pos.getY() + facing.getFrontOffsetY(),
+			pos.getZ() + facing.getFrontOffsetZ()
+		);
 	}
 }
