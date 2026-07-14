@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin.client;
+package dev.rdh.timelessfix.mixin.allocation_rate;
 
 import java.util.List;
 import java.util.Set;

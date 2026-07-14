@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin.client;
+package dev.rdh.timelessfix.mixin.textures;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

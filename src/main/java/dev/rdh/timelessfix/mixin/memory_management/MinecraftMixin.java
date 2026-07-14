@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin.client;
+package dev.rdh.timelessfix.mixin.memory_management;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;

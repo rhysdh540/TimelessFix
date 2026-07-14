@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin;
+package dev.rdh.timelessfix.mixin.core;
 
 import net.minecraft.util.LongHashMap;
 import org.spongepowered.asm.mixin.Mixin;

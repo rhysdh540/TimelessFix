@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin.client;
+package dev.rdh.timelessfix.mixin.model_optimizations.location_canon;
 
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;

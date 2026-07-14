@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin.client;
+package dev.rdh.timelessfix.mixin.resourcepacks;
 
 import net.minecraft.client.resources.AbstractResourcePack;
 import net.minecraft.util.ResourceLocation;

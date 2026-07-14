@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin.client;
+package dev.rdh.timelessfix.mixin.core;
 
 import net.minecraft.util.Timer;
 import org.spongepowered.asm.mixin.Mixin;

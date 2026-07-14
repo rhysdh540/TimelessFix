@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin;
+package dev.rdh.timelessfix.mixin.core;
 
 import dev.rdh.timelessfix.NoOpReadWriteLock;
 import java.util.concurrent.locks.ReadWriteLock;

@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin.client;
+package dev.rdh.timelessfix.mixin.resourcepacks;
 
 import java.io.File;
 import net.minecraft.client.resources.DefaultResourcePack;

@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin.client;
+package dev.rdh.timelessfix.mixin.textures;
 
 import java.awt.image.BufferedImage;
 import net.minecraft.client.renderer.texture.TextureUtil;

@@ -1,4 +1,4 @@
-package dev.rdh.timelessfix.mixin;
+package dev.rdh.timelessfix.mixin.memory_management;
 
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.pathfinder.NodeProcessor;
