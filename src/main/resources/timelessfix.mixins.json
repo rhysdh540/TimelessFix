@@ -17,6 +17,7 @@
     "client.ResourceIndexMixin",
     "client.ResourceLocationAccessor",
     "client.ThreadDownloadImageDataMixin",
+    "client.TextureManagerMixin",
     "client.TextureUtilMixin",
     "client.TimerMixin",
     "client.WorldMixin"
