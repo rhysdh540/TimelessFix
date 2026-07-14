@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "DataWatcherMixin",
-    "LongHashMapMixin"
+    "LongHashMapMixin",
+    "ResourceLocationMixin"
   ],
   "client": [
     "client.AbstractResourcePackMixin",
@@ -21,5 +22,8 @@
   ],
   "injectors": {
     "defaultRequire": 1
+  },
+  "mixinextras": {
+    "minVersion": "0.5.1"
   }
 }
