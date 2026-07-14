@@ -20,17 +20,38 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(World.class)
 abstract class WorldMixin {
 	@Shadow @Final public boolean isRemote;
+	@Shadow @Final public List<EntityPlayer> playerEntities;
 	@Shadow protected abstract int getRenderDistanceChunks();
 
 	@Unique private int timelessFix$chunkX = Integer.MIN_VALUE;
 	@Unique private int timelessFix$chunkZ = Integer.MIN_VALUE;
 	@Unique private int timelessFix$renderDistance = Integer.MIN_VALUE;
+	@Unique private int[] timelessFix$playerChunkXs = new int[0];
+	@Unique private int[] timelessFix$playerChunkZs = new int[0];
 	@Unique private boolean timelessFix$skipActiveChunkBuild;
 
 	@Inject(method = "setActivePlayerChunksAndCheckLight", at = @At("HEAD"))
 	private void checkActiveChunkBuild(CallbackInfo ci) {
+		int renderDistance = this.getRenderDistanceChunks();
 		if (!this.isRemote) {
-			this.timelessFix$skipActiveChunkBuild = false;
+			int playerCount = this.playerEntities.size();
+			this.timelessFix$skipActiveChunkBuild = renderDistance == this.timelessFix$renderDistance
+				&& playerCount == this.timelessFix$playerChunkXs.length;
+			if (playerCount != this.timelessFix$playerChunkXs.length) {
+				this.timelessFix$playerChunkXs = new int[playerCount];
+				this.timelessFix$playerChunkZs = new int[playerCount];
+			}
+
+			for (int i = 0; i < playerCount; i++) {
+				EntityPlayer player = this.playerEntities.get(i);
+				int chunkX = MathHelper.floor_double(player.posX / 16.0D);
+				int chunkZ = MathHelper.floor_double(player.posZ / 16.0D);
+				this.timelessFix$skipActiveChunkBuild &= chunkX == this.timelessFix$playerChunkXs[i]
+					&& chunkZ == this.timelessFix$playerChunkZs[i];
+				this.timelessFix$playerChunkXs[i] = chunkX;
+				this.timelessFix$playerChunkZs[i] = chunkZ;
+			}
+			this.timelessFix$renderDistance = renderDistance;
 			return;
 		}
 
@@ -42,7 +63,6 @@ abstract class WorldMixin {
 
 		int chunkX = MathHelper.floor_double(player.posX / 16.0D);
 		int chunkZ = MathHelper.floor_double(player.posZ / 16.0D);
-		int renderDistance = this.getRenderDistanceChunks();
 		this.timelessFix$skipActiveChunkBuild = chunkX == this.timelessFix$chunkX
 			&& chunkZ == this.timelessFix$chunkZ
 			&& renderDistance == this.timelessFix$renderDistance;
@@ -56,7 +76,7 @@ abstract class WorldMixin {
 		at = @At(value = "INVOKE", target = "Ljava/util/Set;clear()V")
 	)
 	private void keepActiveChunks(Set<ChunkCoordIntPair> chunks) {
-		if (!this.isRemote || !this.timelessFix$skipActiveChunkBuild) {
+		if (!this.timelessFix$skipActiveChunkBuild) {
 			chunks.clear();
 		}
 	}
@@ -66,10 +86,13 @@ abstract class WorldMixin {
 		at = @At(value = "INVOKE", target = "Ljava/util/List;size()I", ordinal = 0)
 	)
 	private int activeChunkPlayerCount(List<EntityPlayer> players) {
+		if (this.timelessFix$skipActiveChunkBuild) {
+			return 0;
+		}
 		if (!this.isRemote) {
 			return players.size();
 		}
-		return this.timelessFix$skipActiveChunkBuild || Minecraft.getMinecraft().thePlayer == null ? 0 : 1;
+		return Minecraft.getMinecraft().thePlayer == null ? 0 : 1;
 	}
 
 	@Redirect(
