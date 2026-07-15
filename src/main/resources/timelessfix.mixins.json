@@ -4,10 +4,12 @@
   "package": "dev.rdh.timelessfix.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+	"allocation_rate.ChunkEntityListsAccessor",
     "allocation_rate.EntityLightingMixin",
     "allocation_rate.EntityTameableMixin",
     "allocation_rate.EnumFacingPlaneMixin",
     "allocation_rate.WorldLightingMixin",
+	"allocation_rate.WorldCollisionMixin",
     "core.DataWatcherMixin",
     "core.LongHashMapMixin",
     "memory_management.NodeProcessorMixin",
