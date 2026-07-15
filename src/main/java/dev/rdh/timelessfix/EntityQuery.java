@@ -15,6 +15,15 @@ public final class EntityQuery {
 
 	public static void addCollisionBoxes(World world, Entity subject, AxisAlignedBB queryBox,
 		AxisAlignedBB collisionBox, List<AxisAlignedBB> boxes) {
+		scan(world, subject, queryBox, collisionBox, boxes);
+	}
+
+	public static void pushCollidingEntities(World world, Entity subject, AxisAlignedBB queryBox) {
+		scan(world, subject, queryBox, null, null);
+	}
+
+	private static void scan(World world, Entity subject, AxisAlignedBB queryBox,
+		AxisAlignedBB collisionBox, List<AxisAlignedBB> boxes) {
 		int minChunkX = MathHelper.floor_double((queryBox.minX - 2.0) / 16.0);
 		int maxChunkX = MathHelper.floor_double((queryBox.maxX + 2.0) / 16.0);
 		int minChunkZ = MathHelper.floor_double((queryBox.minZ - 2.0) / 16.0);
@@ -39,12 +48,12 @@ public final class EntityQuery {
 				for (int section = minSection; section <= maxSection; section++) {
 					for (Entity entity : entityLists[section]) {
 						if (entity != subject && entity.getEntityBoundingBox().intersectsWith(queryBox)) {
-							addCollisionBoxes(subject, entity, collisionBox, boxes);
+							process(subject, entity, collisionBox, boxes);
 							Entity[] parts = entity.getParts();
 							if (parts != null) {
 								for (Entity part : parts) {
 									if (part != subject && part.getEntityBoundingBox().intersectsWith(queryBox)) {
-										addCollisionBoxes(subject, part, collisionBox, boxes);
+										process(subject, part, collisionBox, boxes);
 									}
 								}
 							}
@@ -55,10 +64,18 @@ public final class EntityQuery {
 		}
 	}
 
-	private static void addCollisionBoxes(Entity subject, Entity entity, AxisAlignedBB collisionBox,
+	private static void process(Entity subject, Entity entity, AxisAlignedBB collisionBox,
 		List<AxisAlignedBB> boxes) {
-		if (!EntitySelectors.NOT_SPECTATING.apply(entity)
-			|| subject.riddenByEntity == entity || subject.ridingEntity == entity) {
+		if (!EntitySelectors.NOT_SPECTATING.apply(entity)) {
+			return;
+		}
+		if (boxes == null) {
+			if (entity.canBePushed()) {
+				entity.applyEntityCollision(subject);
+			}
+			return;
+		}
+		if (subject.riddenByEntity == entity || subject.ridingEntity == entity) {
 			return;
 		}
 

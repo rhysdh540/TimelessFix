@@ -6,6 +6,7 @@
   "mixins": [
 	"allocation_rate.ChunkEntityListsAccessor",
     "allocation_rate.EntityLightingMixin",
+	"allocation_rate.EntityLivingBaseCollisionMixin",
     "allocation_rate.EntityTameableMixin",
     "allocation_rate.EnumFacingPlaneMixin",
     "allocation_rate.WorldLightingMixin",
