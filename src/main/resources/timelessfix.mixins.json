@@ -20,6 +20,7 @@
   "client": [
     "allocation_rate.EntityCullingMixin",
 	"allocation_rate.FontRendererMixin",
+	"allocation_rate.LayerArmorBaseMixin",
 	"allocation_rate.RendererLivingEntityMixin",
     "allocation_rate.WorldMixin",
     "core.TimerMixin",
