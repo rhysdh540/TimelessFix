@@ -1,6 +1,7 @@
 package dev.rdh.timelessfix;
 
 import dev.rdh.timelessfix.mixin.allocation_rate.ChunkEntityListsAccessor;
+import dev.rdh.timelessfix.mixin.allocation_rate.ClassInheritanceMultiMapAccessor;
 import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
@@ -46,7 +47,10 @@ public final class EntityQuery {
 				);
 
 				for (int section = minSection; section <= maxSection; section++) {
-					for (Entity entity : entityLists[section]) {
+					List<Entity> entities =
+						((ClassInheritanceMultiMapAccessor) entityLists[section]).timelessFix$getValues();
+					for (int i = 0; i < entities.size(); i++) {
+						Entity entity = entities.get(i);
 						if (entity != subject && entity.getEntityBoundingBox().intersectsWith(queryBox)) {
 							process(subject, entity, collisionBox, boxes);
 							Entity[] parts = entity.getParts();

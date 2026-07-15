@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
 	"allocation_rate.ChunkEntityListsAccessor",
+	"allocation_rate.ClassInheritanceMultiMapAccessor",
     "allocation_rate.EntityLightingMixin",
 	"allocation_rate.EntityLivingBaseCollisionMixin",
     "allocation_rate.EntityTameableMixin",
