@@ -18,6 +18,7 @@
   ],
   "client": [
     "allocation_rate.EntityCullingMixin",
+	"allocation_rate.RendererLivingEntityMixin",
     "allocation_rate.WorldMixin",
     "core.TimerMixin",
     "memory_management.MinecraftMixin",
