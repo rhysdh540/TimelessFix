@@ -34,9 +34,13 @@
     "resourcepacks.AbstractResourcePackMixin",
     "resourcepacks.DefaultResourcePackMixin",
     "resourcepacks.ResourceIndexMixin",
+    "textures.AbstractClientPlayerAccessor",
+    "textures.NetHandlerPlayClientMixin",
+    "textures.NetworkPlayerInfoAccessor",
     "textures.TextureManagerMixin",
     "textures.TextureUtilMixin",
-    "textures.ThreadDownloadImageDataMixin"
+    "textures.ThreadDownloadImageDataMixin",
+    "textures.WorldClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
