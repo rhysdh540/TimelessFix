@@ -1,5 +1,6 @@
 package dev.rdh.timelessfix.mixin.memory_management;
 
+import dev.rdh.timelessfix.ClassInfoManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -20,6 +21,11 @@ abstract class MinecraftMixin {
 		if (world != this.theWorld && this.entityRenderer != null) {
 			this.entityRenderer.getMapItemRenderer().clearLoadedMaps();
 		}
+	}
+
+	@Inject(method = "startGame", at = @At("RETURN"))
+	private void clearMixinMetadata(CallbackInfo ci) {
+		ClassInfoManager.clear();
 	}
 
 	@Redirect(
