@@ -14,6 +14,9 @@
 	"allocation_rate.WorldCollisionMixin",
     "core.DataWatcherMixin",
     "core.LongHashMapMixin",
+    "memory_management.EnchantmentDamageIteratorMixin",
+    "memory_management.EnchantmentHelperMixin",
+    "memory_management.EnchantmentHurtIteratorMixin",
     "memory_management.NodeProcessorMixin",
     "model_optimizations.location_canon.ResourceLocationMixin"
   ],
