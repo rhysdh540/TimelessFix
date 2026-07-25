@@ -31,6 +31,7 @@
     "memory_management.ClientPlayNetworkingImplMixin",
     "memory_management.MinecraftMixin",
     "memory_management.NetHandlerPlayClientMixin",
+    "memory_management.PacketThreadUtilRunnableMixin",
     "model_optimizations.location_canon.ModelResourceLocationMixin",
     "model_optimizations.location_canon.ResourceLocationAccessor",
     "resourcepacks.AbstractResourcePackMixin",
