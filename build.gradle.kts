@@ -17,10 +17,19 @@ object Versions {
     val feather = "1"
     val osl = "0.20.3"
     val fabric = "0.19.3"
+    val celeritas = "2.4.0-dev.5"
 }
 
 ploceus {
     setIntermediaryGeneration(2)
+}
+
+val celery = sourceSets.create("celery") {
+    compileClasspath += sourceSets.main.map { it.output + it.compileClasspath }.get()
+}
+
+repositories {
+    maven("https://maven.taumc.org/releases")
 }
 
 dependencies {
@@ -30,10 +39,15 @@ dependencies {
 
     modImplementation("net.fabricmc:fabric-loader:${Versions.fabric}")
     ploceus.dependOsl(Versions.osl)
+    add(celery.compileOnlyConfigurationName, "org.embeddedt.celeritas:celeritas-common:${Versions.celeritas}")
 }
 
 tasks.assemble {
     dependsOn("remapJar")
+}
+
+tasks.jar {
+    from(celery.output)
 }
 
 tasks.processResources {

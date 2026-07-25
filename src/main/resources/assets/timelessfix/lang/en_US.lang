@@ -1,0 +1,3 @@
+timelessfix.options.pages.timelessfix=TimelessFix
+timelessfix.options.release_crash_reserve.name=Release crash reserve
+timelessfix.options.release_crash_reserve.tooltip=Releases Minecraft's 10 MiB emergency reserve after startup.
