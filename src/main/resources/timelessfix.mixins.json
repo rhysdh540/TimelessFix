@@ -15,9 +15,11 @@
     "core.DataWatcherMixin",
     "core.LongHashMapMixin",
     "memory_management.BlockStateStateImplementationMixin",
+    "memory_management.ChunkMixin",
     "memory_management.EnchantmentDamageIteratorMixin",
     "memory_management.EnchantmentHelperMixin",
     "memory_management.EnchantmentHurtIteratorMixin",
+    "memory_management.NibbleArrayMixin",
     "memory_management.NodeProcessorMixin",
     "model_optimizations.location_canon.ResourceLocationMixin"
   ],
