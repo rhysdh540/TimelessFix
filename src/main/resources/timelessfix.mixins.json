@@ -20,6 +20,7 @@
     "allocation_rate.LayerArmorBaseMixin",
     "allocation_rate.RendererLivingEntityMixin",
     "allocation_rate.WorldMixin",
+    "bugfix.LivingEntityMixin",
     "core.TimerMixin",
     "memory_management.ClientPlayNetworkingImplMixin",
     "memory_management.MinecraftMixin",
