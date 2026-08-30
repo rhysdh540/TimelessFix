@@ -5,17 +5,20 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "allocation_rate.ChunkEntityListsAccessor", "allocation_rate.ClassInheritanceMultiMapAccessor",
-    "allocation_rate.EntityLightingMixin", "allocation_rate.EntityLivingBaseCollisionMixin",
+    "allocation_rate.EntityMixin", "allocation_rate.EntityLivingBaseMixin",
     "allocation_rate.EntityTameableMixin", "allocation_rate.EnumFacingPlaneMixin",
     "allocation_rate.WorldCollisionMixin", "allocation_rate.WorldLightingMixin", "bugfix.ScoreboardMixin",
-    "core.DataWatcherMixin", "core.LongHashMapMixin", "memory_management.BlockStateStateImplementationMixin",
+    "core.DataWatcherMixin", "core.LongHashMapMixin", "core.Vec3iMixin",
+    "fastrandom.EntityMixin", "fastrandom.ItemMixin", "fastrandom.WorldMixin",
+    "memory_management.BlockRedstoneTorchMixin", "memory_management.BlockStateStateImplementationMixin",
     "memory_management.ChunkMixin", "memory_management.EnchantmentDamageIteratorMixin",
     "memory_management.EnchantmentHelperMixin", "memory_management.EnchantmentHurtIteratorMixin",
     "memory_management.NibbleArrayMixin", "memory_management.NodeProcessorMixin",
     "model_optimizations.location_canon.ResourceLocationMixin"
   ],
   "client": [
-    "allocation_rate.EntityCullingMixin",
+    "allocation_rate.EffectRendererMixin",
+    "allocation_rate.RenderMixin",
     "allocation_rate.FontRendererMixin",
     "allocation_rate.LayerArmorBaseMixin",
     "allocation_rate.RendererLivingEntityMixin",

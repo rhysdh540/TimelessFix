@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(World.class)
 abstract class WorldLightingMixin {
 	@Unique private static final EnumFacing[] timelessFix$facings = EnumFacing.values();
-	@Unique private static final ThreadLocal<BlockPos.MutableBlockPos> timelessFix$neighborPosition =
-		ThreadLocal.withInitial(BlockPos.MutableBlockPos::new);
+	@Unique private final BlockPos.MutableBlockPos timelessFix$neighborPosition = new BlockPos.MutableBlockPos();
+	@Unique private final BlockPos.MutableBlockPos timelessFix$rawLightPosition = new BlockPos.MutableBlockPos();
 
 	@Shadow public abstract boolean canSeeSky(BlockPos pos);
 	@Shadow public abstract IBlockState getBlockState(BlockPos pos);
@@ -44,7 +44,7 @@ abstract class WorldLightingMixin {
 			return;
 		}
 
-		BlockPos.MutableBlockPos neighbor = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos neighbor = this.timelessFix$rawLightPosition;
 		for (EnumFacing facing : timelessFix$facings) {
 			neighbor.set(
 				pos.getX() + facing.getFrontOffsetX(),
@@ -100,8 +100,8 @@ abstract class WorldLightingMixin {
 	}
 
 	@Unique
-	private static BlockPos offset(BlockPos pos, EnumFacing facing) {
-		return timelessFix$neighborPosition.get().set(
+	private BlockPos offset(BlockPos pos, EnumFacing facing) {
+		return this.timelessFix$neighborPosition.set(
 			pos.getX() + facing.getFrontOffsetX(),
 			pos.getY() + facing.getFrontOffsetY(),
 			pos.getZ() + facing.getFrontOffsetZ()

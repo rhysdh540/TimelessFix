@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(EntityLivingBase.class)
-abstract class EntityLivingBaseCollisionMixin extends Entity {
-	protected EntityLivingBaseCollisionMixin(World world) {
+abstract class EntityLivingBaseMixin extends Entity {
+	protected EntityLivingBaseMixin(World world) {
 		super(world);
 	}
 
