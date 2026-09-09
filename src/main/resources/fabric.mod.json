@@ -11,6 +11,7 @@
     "main": ["dev.rdh.timelessfix.TimelessFix"]
   },
   "mixins": ["timelessfix.mixins.json"],
+  "accessWidener": "timelessfix.classtweaker",
   "depends": {
     "fabricloader": ">=0.19.0",
     "minecraft": "1.8.9"
