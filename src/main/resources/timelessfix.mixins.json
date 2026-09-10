@@ -38,6 +38,7 @@
     "allocation_rate.WorldMixin",
     "bugfix.EntityLivingBaseMixin",
     "bugfix.PlayerRendererMixin",
+    "bugfix.RenderGlobalMixin",
     "core.TimerMixin",
     "memory_management.ClientPlayNetworkingImplMixin",
     "memory_management.MinecraftMixin",
