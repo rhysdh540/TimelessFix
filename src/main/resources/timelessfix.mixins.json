@@ -37,6 +37,7 @@
     "allocation_rate.RenderMixin",
     "allocation_rate.WorldMixin",
     "bugfix.EntityLivingBaseMixin",
+    "bugfix.GuiIngameMixin",
     "bugfix.PlayerRendererMixin",
     "core.TimerMixin",
     "memory_management.ClientPlayNetworkingImplMixin",
