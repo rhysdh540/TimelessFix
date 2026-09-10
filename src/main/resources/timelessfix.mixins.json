@@ -13,6 +13,7 @@
     "allocation_rate.WorldCollisionMixin",
     "allocation_rate.WorldLightingMixin",
     "bugfix.ScoreboardMixin",
+    "bugfix.WorldMixin",
     "core.DataWatcherMixin",
     "core.LongHashMapMixin",
     "core.Vec3iMixin",
