@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
-    @Inject(method = "displayGuiScreen", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/audio/SoundHandler;resumeSounds()V"))
+    @Inject(method = "displayGuiScreen", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;setIngameFocus()V"))
     private void tf$reapplyKeybinds(GuiScreen guiScreenIn, CallbackInfo ci) {
         for (KeyBinding keyBinding : KeyBinding.keybindArray) {
             int keyCode = keyBinding.getKeyCode();
