@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "dev.rdh.timelessfix.mixin",
   "compatibilityLevel": "JAVA_8",
+  "plugin": "dev.rdh.timelessfix.mixin.TimelessFixMixinPlugin",
   "mixins": [
     "allocation_rate.ChunkEntityListsAccessor",
     "allocation_rate.ClassInheritanceMultiMapAccessor",
