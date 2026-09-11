@@ -20,6 +20,10 @@ object Versions {
     val celeritas = "2.4.0-dev.5"
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/timelessfix.classtweaker")
+}
+
 ploceus {
     setIntermediaryGeneration(2)
 }
