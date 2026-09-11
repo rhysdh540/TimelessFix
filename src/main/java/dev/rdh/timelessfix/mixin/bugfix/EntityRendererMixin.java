@@ -3,6 +3,7 @@ package dev.rdh.timelessfix.mixin.bugfix;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import dev.rdh.timelessfix.TimelessFix;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -14,6 +15,11 @@ public class EntityRendererMixin {
 
     @WrapMethod(method = "renderWorldDirections")
     private void tf$wrapDebugCrosshair(float partialTicks, Operation<Void> original) {
+        if (!TimelessFix.CONFIG.modernParallax) {
+            original.call(partialTicks);
+            return;
+        }
+
         this.tf$renderingDebugCrosshair = true;
         original.call(partialTicks);
         this.tf$renderingDebugCrosshair = false;
@@ -21,6 +27,6 @@ public class EntityRendererMixin {
 
     @ModifyExpressionValue(method = "orientCamera", at = @At(value = "CONSTANT", args = "floatValue=-0.1F"))
     private float tf$fixParallax(float original) {
-        return this.tf$renderingDebugCrosshair ? original : 0.05F;
+        return !TimelessFix.CONFIG.modernParallax || this.tf$renderingDebugCrosshair ? original : 0.05F;
     }
 }

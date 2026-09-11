@@ -45,6 +45,12 @@ public final class CeleritasConfigIntegration implements OptionStorage<TimelessF
 				.setImpact(OptionImpact.HIGH)
 				.setFlags(OptionFlag.REQUIRES_GAME_RESTART)
 				.build())
+			.add(OptionImpl.createBuilder(boolean.class, INSTANCE)
+				.setId(id("modern_parallax"))
+				.setControl(TickBoxControl::new)
+				.setBinding((config, value) -> config.modernParallax = value,
+						config -> config.modernParallax)
+				.build())
 			.build();
 
 		return new OptionPage(id("options"), text("pages.timelessfix"), List.of(memory));
