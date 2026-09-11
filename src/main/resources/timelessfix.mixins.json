@@ -41,6 +41,7 @@
     "bugfix.MinecraftMixin",
     "bugfix.GuiScreenBookMixin",
     "bugfix.PlayerRendererMixin",
+    "bugfix.RenderGlobalMixin",
     "core.TimerMixin",
     "memory_management.ClientPlayNetworkingImplMixin",
     "memory_management.MinecraftMixin",
