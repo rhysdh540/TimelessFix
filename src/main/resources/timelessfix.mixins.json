@@ -41,7 +41,7 @@
     "bugfix.EntityLivingBaseMixin",
     "bugfix.EntityRendererMixin",
     "bugfix.GuiIngameMixin",
-    "bugfix.MinecraftMixin",
+    "bugfix.GuiScreenAddServerMixin",
     "bugfix.GuiScreenBookMixin",
     "bugfix.MinecraftMixin",
     "bugfix.PlayerRendererMixin",
